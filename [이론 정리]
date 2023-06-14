@@ -256,10 +256,28 @@ Closing: Dilation->Erosion (기존의 영역보다 커지고 들어간 부분을
 
 Opening과 Closing의 차이와 비교
 
+[7]Image Warping
+:image를 비틀고 각도를 조절하는 과정
+ex)video stabilization
 
+Geometric transform
+:이미지의 좌표 이동
 
+Scaling= 좌표 이동 및 n배 계산
+Shear= 기울기 계산
 
+[7-1]Warping
+:이동된 좌표 기준으로 이미지 생성
 
+Foward Warping= 픽셀이 M(x,y)를 통한 결과 x',y'으로 바뀌면서 모든 픽셀을 계산하면 이미지가 생성됨
+*실수처럼 정해진 칸에 있지 않은 픽셀의 경우 splatting이라 하여 겹쳐진 곳에 모두 바뀐 값을 보내버린다.
+ splatting 후 값이 겹쳐지게 된다면(다대일 관계) 평균으로 나눠주면 된다.
+ 
+Backward Warping= 역 행렬 계산을 통해 원래의 image로 돌아가려면 어떻게 해야하는지를 이용해 계산하는 것.
+*변형된 좌표가 딱 떨어지는 x,y가 아니라 소수라면 주변 4개의 point를 interpolation을  통해 f(x,y)정수를 구한다.
+ 원래 image인 f(x,y)가 결과로 나오므로 Foward Warping처럼 hole이 생기지 않는다.
+ 
+ 
 
 
 
