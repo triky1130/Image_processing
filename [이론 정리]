@@ -210,11 +210,51 @@ Canny edge detector를 이용하면 된다.
 [6]Canny edge detector
 :edge를 탐색할 때 사용하여 변화량을 측정가능하다.
 
+non-max suppression
+-gradient magnitude가 너무 센 경우 얇게 바꿔주는 것
+:제일 센 magnitude를 찾아서 표시하는 것
 
+gradient의 각도도 구할 수 있다.(공식)
 
+[6-1]Hysteresis thresholding(Double threshloding)
+:정교하게 thresholding하는 방법
+1)TL < x  < TH => weak edge
+2) x  >TH => strong edge
+3) x  <TL => edge가 아니다
 
+[6-2]Morphological(형태분석)
+segmentation
+:비슷한 데이터끼리 그룹화 하는 것
+=threshold를 통해 이미지를 분할하는 것도 큰 틀에서 보면 segmentation이라고 할 수 있다.
 
+Binary Images
+:0 또는 1, 흑백 등 두 가지로 나타낼 수 있는 image
 
+Neighborhoods
+ 4-neighborhood: 동서남북으로 4개가 해당 / connectedness는 상하좌우 이동만 가능,  대각선 이동 불가
+ 8-neighborhood: 3x3에서 가운데 자신 제외 나머지 모두 / connectedness는 상하좌우, 대각선 이동 가능
+
+Recursive labeling
+:하나를 기준으로 옮겨가며 확인 하는 방법, 확인하고 해당 숫자이면 해당 label로 변경하면서 개수 확인
+
+[6-3] Morphological processing
+Translation
+: t(u, v)이면 x방향으로 u만큼, y방향으로 v만큼 이동하는 것
+
+Dilation
+:정해진 structuring element로 합해서 B의 한 칸마다 정해진 element를 씌워주는 것
+=image가 fatter(굵어지는) 효과
+
+Erosion
+:Dilation과 반대 개념으로, B 안에 element가 완전히 포함되는 경우 그 위치의 element의 가운데 위치만 남기는 것
+=image가 thiner(얇아지는) 효과
+
+Boundary Detection by Dilation and Erosion(실습)!
+
+Opening: Erosion->Dilation (큰 부분은 남기고 튀어나온 것들을 제거하는 효과)
+Closing: Dilation->Erosion (기존의 영역보다 커지고 들어간 부분을 채워주는 효과)
+
+Opening과 Closing의 차이와 비교
 
 
 
