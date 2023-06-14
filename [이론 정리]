@@ -277,7 +277,13 @@ Backward Warping= 역 행렬 계산을 통해 원래의 image로 돌아가려면
 *변형된 좌표가 딱 떨어지는 x,y가 아니라 소수라면 주변 4개의 point를 interpolation을  통해 f(x,y)정수를 구한다.
  원래 image인 f(x,y)가 결과로 나오므로 Foward Warping처럼 hole이 생기지 않는다.
  
- 
+[8]Iamge Restoration 
+:image를 깨끗하게 하고 정제하는 과정
+
+image degradation의 종류
+-noise, blur..etc
+
+
 
 
 
