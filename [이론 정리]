@@ -160,6 +160,119 @@ Gaussian pyramid 특성
 [4-7] 정수배가 아닌 실수배 계산
 : 가로, 세로는 실수배를 하면 되고 그 안의 값들은 x/factor, y/factor로 계산한 후 bilinear interpolation을 이용해 값을 정해주면 된다.
  
+[5] Edge detection
+[5-1] Characterizing edges
+:갑자기 변화가 일어나는 부분(rapid change in the image intensity function)
+-그래프 상에서 절댓값으로 변화가 큰 부분
+
+[5-2] Sobel filter
+:edge를 만드는 filter = vertical line을 찾을 때 유용하다(-1 0 1 derivative filter가 수평의 차이를 크게 해줌)
+<vertical sobel filter>
+-1 0 1    1   -1 0 1            
+-2 0 2 =  2 * 
+-1 0 1    1
+        blurring
+<horizontal sobel filter>
+-1 -2 -1    -1   1 2 1
+ 0  0  0 =   0 * 
+-1 -2 -1     1
+
+[5-3] Image Gradient
+:2D를 수평과 수직 방향을 나누어 각각 볼 수도 있지만 변화도(gradient)자체와 각도를 확인할 수도 있다
+Edgd가 되려면 기준인 threshold보다 높은 값을 말한다.
+
+잡음제거를 위해 Gaussian filter를 이용하면 edge도 완만해지는 경향도 있지만 확실히 잡음이 없어지게 된다.
+
+[5-4] Second-order derivative filter
+:2차 미분을 해보기
+
+gaussian filter를 씌워 잡음을 제거한 f(x)에 1차 미분을 하면 x=0에서 극점이 하나 나오고
+2차 미분을 하게 되면 양수, 음수가 바뀌는 변곡점이 x=0에서 나오게 된다.
+부호가 바뀌는 부분이 edge가 된다.
+
+[5-5]Laplace filter
+:2차 미분을 하게 되면 얻게 되는 filter(1 -2 1)
+(수식 참조)
+ 
+[5-6]Laplacian of Gaussian(LOG)
+:기존 신호 I에 2차 미분한 Gaussian filter를 씌우고 I와 컨볼루션 한 것
+=edge 부분을 변곡점에서 찾을 수 있고 잡음도 줄일 수 있음
+
+Laplace filtering과 비교해보면 잡음이 제거된 image를 반환한다.
+
+[5-7]Laplacian of Gaussian(LOG) vs Derivative of Gaussian(DOG) 
+:2차 미분한 결과와 1차 미분한 결과를 비교하면 LOG는 zero-crossing 부분들이 edge 근방에 나타남.
+DOG는 peak라고 굵은 선으로 나타남. 따라서 edge만 보자면 극점만 나타내는 DOG보다 부호가 바뀌는 부분을 나타내는 LOG가 더 낫다.
+
+하지만 zero-crossing도 edge를 나타내는 선을 기준으로 양쪽에 하얗게 표시되는데 edge로만 이루어진 image를 얻으려면 
+Canny edge detector를 이용하면 된다.
+
+[6]Canny edge detector
+:edge를 탐색할 때 사용하여 변화량을 측정가능하다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
