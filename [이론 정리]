@@ -277,22 +277,61 @@ Backward Warping= 역 행렬 계산을 통해 원래의 image로 돌아가려면
 *변형된 좌표가 딱 떨어지는 x,y가 아니라 소수라면 주변 4개의 point를 interpolation을  통해 f(x,y)정수를 구한다.
  원래 image인 f(x,y)가 결과로 나오므로 Foward Warping처럼 hole이 생기지 않는다.
  
-[8]Iamge Restoration 
+[9]Iamge Restoration 
 :image를 깨끗하게 하고 정제하는 과정
 
 image degradation의 종류
 -noise, blur..etc
 
+g(x,) = h(x,y)*f(x,y) + n(x,y)
+        filter*기본 이미지 + 잡음
+
+salt and pepper noise removal
+-low-pass filtering
+:예로 gaussian filter와 같은 것이 있는데 정규 분포 상에서 값이 센 부분들을 넓게 분포하는 값으로 맞춰주는 것인데
+salt and pepper는 특정한 noise들이 너무 튀는 값으로 되어있어서 이 filter로는 적합하지 않다.
+
+-Median Filtering
+:평균값을 찾아서 튀는 값을 평균값으로 대체해주는 filter로 salt and pepper를 해결하기에 적합하다.
+예를 들면 3x3이면 9개의 값을 일렬로 나열 후 중간 값을 뽑고 salt에 해당하는 가장 튀는 값을 중간 값으로 교체해주는 방법
+average filter를 쓰게 되면 9개의 값의 평균을 구해서 그렇게 변경해주면 값이 너무 커지기 때문에 median filter가 효과적이다
+median filter는 필터가 클수록 더 noise 제거에 효과적이다.
+
+-Outlier rejection method
+:튀는 값을 제거해주는 방법으로 적합하다
+
+Gaussian noise removal
+:실제 이미지 = 이미지 + 노이즈 라고 했을 때
+각 항을 100번, 1000번씩 더하고 다시 나눠주는 과정을 하면 기존의 이미지는 그대로 값이 나오는데 노이즈는 n번으로 나눠주면 0으로 수렴한다.
+따라서 노이즈가 제거되는 과정
+
+Adaptive filter(wiener filter)
+:한 이미지에 부분 별로 다른 필터를 적용하는 것
+분산이 작으면 평균값에 치중하고 분산 값이 높으면 원래 픽셀값을 더 활용하는 것
+
+Gaussian filter로 하면 모두 뿌옇게 되고 Bilateral filtering을 하게 되면 각 픽셀에 맞는 필터를 적용할 수 있따
+
+[9-1]Nonlocal Means(NLM) filtering
+:꼭 같은 부분에서의 patch들을 이용해서 noise를 제거할 것만 아니라 더 많은 픽셀들을 이용하기 위해 비슷한 영역의 patch들을 이용해
+average를 내서 noise를 제거하는 방법
+
+[10]Huffman coding
+:무손실 압축에 해당하며 자주 발생하는 픽셀 값에 더 적은 비트 수를 부여하고 적게 발생하는 픽셀 값에 더 많은 비트 수를 부여하는 방법
+
+encoding:비트화
+decoding:비트화 한 것을 다시 복구
+
+[10-1]Run-length Encoding
+:encoding 결과가 0 또는 1로 나오므로 00000을 (0,5)로 표현하여 좀 더 간단하게 나타내는 방법
+
+[10-2]JPEG algorithm
+:손실 압축에 대해서 데이터 손실과 압축력은 반비례 관계. 
 
 
-
-
-
-
-
-
-
-
+[14]CNN(convolution neural network)
+:이미지 분류가 목적
+[14-1]Image Classification
+-이미지 분류의 방해요소: illumination(밝기), deformation(변형), occlusion(가려짐), background clutter(보호색)
 
 
 
